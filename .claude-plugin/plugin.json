@@ -1,0 +1,12 @@
+{
+  "name": "os-kit",
+  "version": "1.0.0",
+  "description": "Build your own AI operating system with Claude: a markdown second brain shared by Claude, ChatGPT, Gemini and Codex, synced by Baalda on your own server, with guarded backups and self-cleaning routines.",
+  "author": {
+    "name": "Razi Ben Shoshan"
+  },
+  "homepage": "https://github.com/Razibsh/os-kit",
+  "repository": "https://github.com/Razibsh/os-kit",
+  "license": "MIT",
+  "keywords": ["second-brain", "markdown", "baalda", "mcp", "coolify", "self-hosted", "obsidian", "personal-os"]
+}

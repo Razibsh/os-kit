@@ -1,0 +1,14 @@
+OS Kit
+Copyright 2026 Razi Ben Shoshan. Released under the MIT License (see LICENSE).
+
+Third-party work referenced or adapted:
+
+- Baalda (https://github.com/naveedharri/baalda), licensed under the Apache License 2.0.
+  skills/build/references/baalda-and-connectors.md contains a small patch to Baalda's
+  app/apps/server/src/auth/auth.ts (invite-only sign-up) and a Docker Compose file adapted
+  from Baalda's deploy/coolify/docker-compose.yml. Those two adapted pieces are offered under
+  the Apache License 2.0, the same licence as the work they modify. They are not part of, or
+  endorsed by, the Baalda project.
+
+- The "AI second brain" method by Ben AI (https://benai.notion.site/ai-second-brain-guide).
+  This kit links to his public videos, guide and skills and does not include or redistribute them.
