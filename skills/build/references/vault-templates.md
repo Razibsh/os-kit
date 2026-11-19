@@ -20,7 +20,8 @@ interview. Never leave a placeholder in a saved file: an empty section says
     <slug>/decisions.md
     <slug>/open-questions.md
     <slug>/log/        dated notes: history
-  2 Areas/             ongoing, no end date (one folder per business, plus personal)
+  2 Areas/             ongoing, no end date (one folder per business)
+    personal/          always created: the routines write os-health.md here and reports in personal/log/
   3 Resources/         rules, prompts, playbooks, reference
     playbooks/
   4 Archive/<year>/    finished or superseded; never read unless asked
@@ -87,6 +88,10 @@ contradict itself.
 Never add a top-level folder, rename a numbered folder, or run a setup, reset
 or reorganise routine on this vault unless <name> asks. Audit skills may run in
 report-only mode; applying their changes needs <name>'s numbered approval.
+**Exception:** the weekly cleanup routine may apply up to 10 mechanical fixes
+per run on its own (a duplicate H1, an obvious missing frontmatter field, a wiki
+link whose renamed target exists exactly once, and any punctuation rule this
+file sets), and lists them in its report. Everything else waits for approval.
 
 **Moving notes between folders:** only inside the Baalda app or with the
 connector's move tool (`move_note` / `move_folder`), never with a file move,
@@ -176,7 +181,7 @@ tags: [os]
 ---
 # MAP - where everything lives
 
-The OS itself: `~/Vaults/OS` on the Mac, synced by Baalda to <os.yourdomain.com>.
+The OS itself: `~/Vaults/OS` on the Mac, synced by Baalda (<your server os.yourdomain.com, or Baalda's hosted plan>).
 Cloud AIs reach it through the "OS" connector.
 If you are an AI reading this: never guess a location. Route from here.
 
@@ -199,7 +204,7 @@ If you are an AI reading this: never guess a location. Route from here.
 | Code | <~/Work/...> and GitHub | Each repo keeps its own STATUS / DECISIONS |
 | Tasks | <Trello board / Todoist / Linear> | Single source of truth for tasks |
 | Vault backup | <private GitHub repo> | Hourly guarded snapshot. Never opened by hand. |
-| Baalda server | <Coolify / VPS, project name> | Update procedure: `3 Resources/baalda-server.md` |
+| Baalda server | <Coolify project name, or "Baalda hosted plan"> | Self-hosted: update procedure in the server repo's `DEPLOY-NOTES.md` (<repo URL>) |
 
 ## Cadence
 Mac (needs the Mac awake): hourly guarded backup; daily 06:15 capture of yesterday;
@@ -412,7 +417,12 @@ saying where it went, with the clickable link.
 Never put a Finder alias or symlink in the vault: both break silently.
 ```
 
-## 3 Resources/tasks.md (if you use Trello; adapt to your tool)
+## 3 Resources/tasks.md (written for list-based tools; adapt to yours)
+
+Trello, Todoist, Linear, Notion and Asana can all hold these six lists (or
+statuses). Apple Reminders: use six lists with the same names. No task tool
+yet: suggest picking one before Phase 4 (Trello's free plan is enough) rather
+than keeping tasks in the vault.
 
 ```markdown
 # Tasks - how the OS and the task tool divide the work

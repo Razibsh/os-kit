@@ -1,6 +1,6 @@
 {
   "name": "os-kit",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Build your own AI operating system with Claude: a markdown second brain shared by Claude, ChatGPT, Gemini and Codex, synced by Baalda on your own server, with guarded backups and self-cleaning routines.",
   "author": {
     "name": "Razi Ben Shoshan"

@@ -18,7 +18,7 @@ numbered approve list you answer in one line.
 |---|---|---|
 | The vault | `~/Vaults/OS`, plain `.md` files in a fixed folder tree | Tool-agnostic. Any AI and any editor can read it, and it survives any tool dying |
 | Baalda | A markdown app (Mac + server) that syncs the vault and exposes it as an MCP connector | One sync engine, and a connector so web and phone AIs can read and write with the Mac asleep |
-| Your server | Baalda's server on a VPS (Coolify on Hetzner in the original build) | Your notes do not live on someone else's cloud. Baalda's hosted plan works too, see `baalda-and-connectors.md` |
+| Your server (optional) | Baalda's server on your own VPS with Coolify, or Baalda's hosted plan | Self-hosted: your notes do not live on someone else's cloud. Hosted: nothing to run. Both give the same connector |
 | `AGENTS.md` | The contract every AI reads first, under 200 lines | One rulebook for every AI. `CLAUDE.md` only imports it |
 | `MAP.md` | Where everything lives, inside and outside the vault | An AI that has to guess a path will guess wrong |
 | `Context/` | 5 to 10 files about you and your businesses, filled by an interview | Ben's tip 1: these files are 80% of the value |

@@ -38,6 +38,9 @@ path on someone who would be better served by the hosted plan.
   ssh-keygen -t ed25519 -f ~/.ssh/os-server -C "os-server"
   cat ~/.ssh/os-server.pub
   ```
+  `ssh-keygen` asks for a passphrase, and Claude Code's shell cannot answer
+  prompts: the person runs that first line in the Terminal app (a passphrase
+  is recommended; macOS can remember it in Keychain), then Claude runs `cat`.
   The private file `~/.ssh/os-server` never leaves the Mac.
 - When the server exists, the person tells Claude its public IP. Claude adds an
   alias so later steps are simple:
@@ -83,7 +86,18 @@ own password themselves; Claude never types it.)
 - In Coolify: Settings > set the instance domain to `https://coolify.<domain>`.
   Coolify gets the HTTPS certificate itself. Then close ports 8000, 6001, 6002.
 
-### 5. Optional: Tailscale
+### 5. Harden it (default, 10 minutes)
+With the person's yes, over SSH:
+```bash
+ssh os-server 'apt-get update && apt-get -y upgrade && apt-get -y install unattended-upgrades fail2ban && dpkg-reconfigure -f noninteractive unattended-upgrades'
+ssh os-server 'sshd -T | grep -E "^(passwordauthentication|permitrootlogin)"'
+```
+Password login must be `no`. If it says `yes`, set
+`PasswordAuthentication no` in `/etc/ssh/sshd_config` (and in any file under
+`/etc/ssh/sshd_config.d/`), then `systemctl reload ssh`, keeping the current
+SSH session open until a new one is proven to work.
+
+### 6. Recommended: Tailscale
 Tailscale is a free private network between your own devices. With it on the
 Mac and the server, SSH can be closed to the internet entirely and opened only
 on the private network. Recommended for anyone who will keep the server for
@@ -91,7 +105,7 @@ years; skip on day one if it feels like too much. Docs: https://tailscale.com/kb
 If they add it, update `~/.ssh/config` to the server's Tailscale address and
 then close port 22 publicly.
 
-### 6. Keep it healthy
+### 7. Keep it healthy
 - Turn on the provider's automatic backups or snapshots if offered (small cost).
 - Coolify updates itself from its dashboard; update Coolify before updating
   Baalda.

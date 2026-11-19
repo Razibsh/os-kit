@@ -19,8 +19,8 @@ you, step by step, checking each step before moving on.
 
    > Set up my OS with the kit at https://github.com/Razibsh/os-kit
 
-That's it. Claude reads the kit, asks you nine questions, and walks you through
-seven phases.
+That's it. Claude checks your setup, asks you nine questions, and walks you
+through the phases.
 
 **Prefer installing it as a plugin** (so you get updates)? In Claude Code:
 
@@ -57,7 +57,7 @@ Time: a few sittings. Roughly 3 to 4 hours of your attention in total.
 
 ## The phases
 
-0. Check your setup (Claude Code or not, Mac or not, server or not)
+0. Check your setup (Claude Code or not, Mac or not, the tools a fresh Mac needs, an OS already there or not)
 1. The vault: a fixed folder tree and the rule files every AI reads
 2. The interview: who you are, your business, customers, voice, goals, tools, projects
 3. Baalda: on Baalda's hosted plan, or on your own server (VPS, Coolify, domain, invite-only sign-up, backups)

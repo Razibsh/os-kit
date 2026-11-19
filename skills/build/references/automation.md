@@ -361,14 +361,19 @@ Setup:
 2. Make a private repo, e.g. `<you>/os-routines`, holding
    `.claude/skills/optimizer/` (the skill) and a `CLAUDE.md` with the house
    rules below.
-3. The routine clones two repos as sources: `os-routines` and your backup repo
+3. Give Claude's cloud sessions access to these two private repos (connect
+   GitHub for Claude Code on the web and allow both repos; check current docs
+   for the exact screen). Note: the snapshot is refreshed by the Mac's hourly
+   backup, so if the Mac slept all week the cleanup analyses an older copy.
+   Its writes still go to the live vault through the connector.
+4. The routine clones two repos as sources: `os-routines` and your backup repo
    (the hourly snapshot). It analyses the snapshot locally (fast, complete) and
    writes only through the connector. It never pushes.
 
 **Before the first run,** add this exception to `AGENTS.md`, or the cleanup
 will refuse to fix anything (the contract says audit changes need numbered
 approval, and the contract wins): *"Exception: the weekly cleanup may apply up
-to 10 mechanical fixes per run (em dashes, a duplicate H1, an obvious missing
+to 10 mechanical fixes per run (a duplicate H1, an obvious missing
 frontmatter field, a wiki link whose renamed target exists exactly once)."*
 
 Trigger prompt:
@@ -398,7 +403,7 @@ AGENTS.md wins.
 1. Discovery, roles, all frameworks, score, architectural read, on the snapshot. Skip task lists and
    checkpoint questions (nobody is there).
 2. No user: save everything to plan, except up to 10 mechanical fixes applied live through the
-   connector: em dashes, a duplicate H1, a missing frontmatter field whose value is obvious from the
+   connector: a duplicate H1, a punctuation rule AGENTS.md sets, a missing frontmatter field whose value is obvious from the
    note itself, a wiki link whose target was renamed and exists exactly once. Never more than 10.
    Never anything in Context/, never a reviewed: field, never 1 Projects/_REGISTER.md.
 3. Never move, rename or delete a note, never create or delete a folder, never change access. Moves go

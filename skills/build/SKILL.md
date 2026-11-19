@@ -12,30 +12,43 @@ them, from zero, following this kit. The kit is a tested recipe from someone who
 built and ran it for months; follow it rather than improvising. The reference
 files sit in `references/` next to this file.
 
-## Before anything else
+## Phase 0 - Check where we are (5 minutes)
 
-Read these in one batch: `references/how-it-works.md`,
-`references/vault-templates.md`, `references/interview.md`,
-`references/server-from-zero.md`, `references/baalda-and-connectors.md`,
-`references/instructions-for-every-ai.md`, `references/skills.md`,
-`references/automation.md`.
-
-## Phase 0 - Check where we are (2 minutes)
+Do these checks before reading the reference files.
 
 1. **Terminal?** If you cannot run shell commands in this session (you are in
-   claude.ai chat, not Claude Code), say so plainly: the vault and the
-   interview can happen here, but the server and the Mac automation need Claude
-   Code. Tell them to install the Claude desktop app (https://claude.ai/download),
-   open its **Code** tab, and paste the same kit link there. Offer to start the
-   interview here meanwhile, handing them each file's text to save.
-2. **System.** Run `uname -s` and `sw_vers` (Mac) to learn the OS. Not macOS:
-   tell them up front which parts work as is and which you will port (table at
-   the end of `references/server-from-zero.md`).
-3. **Existing OS?** Check whether `~/Vaults/OS/AGENTS.md` (or the folder they
-   name) already exists. If it does, stop and ask: this kit builds a new OS. For
-   an existing one, offer a read-only review against the kit instead, and change
-   nothing without their numbered approval.
-4. Then tell them in 5 lines what you are about to build, and ask the setup
+   claude.ai chat, not Claude Code), say so plainly in your first reply: the
+   vault and the interview can happen here, but the server and the Mac
+   automation need Claude Code. Tell them to install the Claude desktop app
+   (https://claude.ai/download), open its **Code** tab, and paste the same kit
+   link there. Offer to start the interview here meanwhile, handing them each
+   file's text to save.
+2. **System.** Run `uname -s` (and `sw_vers` on a Mac). Not macOS: tell them up
+   front which parts work as is and which you will port (table at the end of
+   `references/server-from-zero.md`).
+3. **Existing OS?** Check whether `~/Vaults/OS/AGENTS.md` exists. If it does,
+   stop: this kit builds a new OS, and running it would overwrite theirs. Offer
+   three choices: (1) a read-only review of their OS against the kit (the
+   checklist at the end of this file), (2) a second, separate OS in another
+   folder, (3) something else. Change nothing until they choose.
+4. **Tools on a fresh Mac.** Check `xcode-select -p`, `git --version`,
+   `gh --version`. Explain what each is in one line.
+   - Missing Command Line Tools (git, clang and python3 come with them): the
+     person runs `xcode-select --install` and clicks Install in the window that
+     opens.
+   - Missing `gh` (GitHub's command-line tool): with Homebrew, `brew install gh`;
+     without it, the installer from https://cli.github.com.
+   - Then the person signs in themselves, in the Terminal app, because it asks
+     questions you cannot answer from here: `gh auth login` (choose GitHub.com,
+     HTTPS, log in with a web browser). Check with `gh auth status`.
+   - General rule: any command that prompts for input (passwords, passphrases,
+     sign-ins, `sudo`) is run by the person in the Terminal app, never by you.
+5. Now read the reference files in one batch: `references/how-it-works.md`,
+   `references/vault-templates.md`, `references/interview.md`,
+   `references/server-from-zero.md`, `references/baalda-and-connectors.md`,
+   `references/instructions-for-every-ai.md`, `references/skills.md`,
+   `references/automation.md`.
+6. Tell them in 5 lines what you are about to build, and ask the setup
    questions below in ONE message.
 
 ## How to work with the user
@@ -60,7 +73,8 @@ Read these in one batch: `references/how-it-works.md`,
 
 1. Your first name, and what you do (one line per business or job).
 2. Do you already have notes somewhere (Obsidian, Notion export, Apple Notes,
-   Google Docs, a folder)? Where?
+   Google Docs, a folder)? Where? (If one of them is already an AI-maintained
+   vault with an AGENTS.md, say so: you will offer the review instead.)
 3. Server: (a) I have a server with Coolify, (b) I have a server without
    Coolify, (c) I have no server, (d) I don't know what this means. For (a)
    or (b): do you have a domain, and where is its DNS managed?
@@ -85,9 +99,9 @@ Phase 3.
 - Write AGENTS.md, CLAUDE.md, MAP.md, START-HERE.md, `1 Projects/_REGISTER.md`
   and the `3 Resources/` rule files from the templates, filled with what you know
   so far. Unknowns say EMPTY ON PURPOSE.
-- Add to AGENTS.md from day one the weekly-cleanup exception from
-  `references/automation.md` (up to 10 mechanical fixes per run). Without it,
-  the cleanup later refuses to fix anything.
+- Keep the weekly-cleanup exception that the AGENTS.md template carries (up
+  to 10 mechanical fixes per run). Without it, the cleanup later refuses to
+  fix anything.
 - Existing notes: back them up first (`tar` to their home folder), propose
   where each kind of note goes in the new tree, and wait for their yes before
   copying. Copy, never move, the originals.
@@ -116,8 +130,10 @@ Phase 3.
 - Mac: the rehearsal vault first (show them the move-creates-a-duplicate test),
   then open `~/Vaults/OS` in Baalda, sync on, Freeze vault root on.
 - Make the vault a standing folder for Claude Code (and Codex if they use it).
-- **Check:** the note count in Baalda matches the folder; self-hosted: `/health`
-  answers and a made-up sign-up is refused from outside.
+- **Check:** every top-level folder shows in Baalda and random notes open with
+  their content; self-hosted: `/health` answers and a made-up sign-up is
+  refused from outside. (Phase 4 checks the exact note count through the
+  connector.)
 
 ## Phase 4 - Connect every AI (about 20 min theirs)
 
@@ -135,11 +151,14 @@ Phase 3.
 ## Phase 5 - Skills (about 30 min)
 
 - Help them install Ben AI's free skills from the links in
-  `references/skills.md` (never bundle or copy them: they are his work).
+  `references/skills.md` (never bundle or copy them: they are his work). The
+  optimizer is the one the weekly cleanup needs; the operator is optional (the
+  kit already has an adapted daily update); Ben's setup skill is not needed.
 - Run the optimizer once in "save everything to plan" mode on the new vault and
   show the score and the plan. Change nothing without their numbered approval.
-- Once the vault exists, remove or disable the setup skill (its reset option is
-  dangerous on an existing vault).
+- If they installed **Ben's** `/second-brain-setup` skill (not this kit),
+  remove or disable it once the vault exists: it can trigger on everyday words
+  and offers a full reset of an existing vault.
 - If they have their own skills: find business facts inside them, merge what
   `Context/` lacks, and replace the copies with pointers to the OS.
 - **Check:** a skill run in a fresh session reflects a one-line change they make
@@ -159,7 +178,10 @@ Phase 3.
   routines (their yes before scheduling). Convert their local times to UTC cron
   and tell them the two dates a year to re-check them.
 - Run each routine once by hand and show what it wrote.
-- **Check:** `os-health.md` shows every job green with a real last-run time.
+- **Check:** `2 Areas/personal/os-health.md` shows the backup and the capture
+  green with a real last-run time, and each of the three routines has run once
+  by hand and written what it should (a Daily line or report, a cleanup note,
+  a brief).
 
 ## Phase 7 - Hand over
 
@@ -172,3 +194,39 @@ Phase 3.
 - Ask what went off script in this run, and if they are willing, suggest they
   tell the kit's author (an issue on the kit's GitHub repo) so it gets fixed for
   the next person.
+
+## Reviewing an OS that already exists (read-only)
+
+Use this when Phase 0 found an existing vault and they chose the review. Read,
+compare, and return one numbered list of gaps, smallest change first. Change
+nothing until they approve items by number.
+
+1. Rules: is there an `AGENTS.md` under 200 lines, a `CLAUDE.md` that only
+   imports it, a `MAP.md`? Does AGENTS.md have the two kinds of notes, one fact
+   one home, the move rule for Baalda, the weekly-cleanup exception?
+2. Lifecycle: do projects have one current README each, with dated notes in
+   `log/`? Any README over ~150 lines of logs? Daily notes over 3 KB?
+3. Context: which `Context/` files exist, their status, `reviewed:` dates, and
+   open `(?)`.
+4. Sync and safety: one sync engine only? `.context/` excluded from any backup?
+   Is there a guarded backup (refuses mass deletions)? When did it last run?
+5. Jobs: which scheduled jobs exist, do they write heartbeats, are they green?
+6. Connectors: which AIs reach the OS, and do their standing instructions point
+   at it?
+7. Skills: do any skills carry their own copies of business facts?
+
+## Things that change: re-check before you rely on them
+
+These were true when the kit was written (Nov 2026). Before telling the person
+to click something on this list, check the current docs or ask them what they
+see, and say so if it differs:
+- Baalda menus ("Server settings", "Vault settings > MCP", "Freeze vault
+  root", "Make local only"), whether the hosted plan is free and exposes the
+  connector, and the latest release tag.
+- The connector screens in claude.ai, ChatGPT and Gemini (and that Gemini names
+  it "Context" by default).
+- Claude cloud routines: where they are managed (claude.ai/code/routines at the
+  time), how a routine is given access to private GitHub repos (connect GitHub
+  for Claude Code on the web and allow those repos), and the folder repos are
+  cloned into.
+- Coolify's install command and ports, and Codex's config keys.

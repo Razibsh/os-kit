@@ -24,9 +24,8 @@ can read and write your notes from the web or the phone with the Mac asleep.
 |---|---|---|
 | **A. Baalda's hosted plan** | 10 minutes | Start here if you have no server. The connector works the same. You can move to your own server later with a fresh import |
 | **B. Self-hosted on Coolify** (the original build) | One evening | You already run a VPS with Coolify, or want your notes on your own machine |
-| **C. Self-hosted with plain Docker Compose** | One evening | A VPS without Coolify. Use upstream's `docs/DEPLOY.md` plus the same three changes below |
 
-No server yet, or a server without Coolify? Do `server-from-zero.md` first.
+No server yet, or a server without Coolify? Do `server-from-zero.md` first: it installs Coolify, because the compose file below relies on Coolify (its network, generated passwords and proxy). Running Baalda without Coolify is possible with upstream's `docs/DEPLOY.md`, but this kit does not cover it.
 
 Whichever you pick, the Mac side and the connectors are identical.
 
@@ -46,9 +45,10 @@ to the internet). You type every password yourself.
    T=$(mktemp -d) && git clone -q --depth 1 --branch vX.Y.Z https://github.com/naveedharri/baalda.git "$T/up"
    rsync -a --exclude .git "$T/up/" ./
    ```
-3. Add three files of your own: `docker-compose.yaml` (below), `DEPLOY-NOTES.md`
-   (your update procedure, below) and `patches/invite-only-signup.patch`
-   (below). Apply the patch and commit.
+3. Add three files of your own: `docker-compose.yaml` (below),
+   `patches/invite-only-signup.patch` (below), and `DEPLOY-NOTES.md`: a copy of
+   step 10 "Updating Baalda" below, plus this server's specifics (Coolify
+   project name, domain, release tag in use). Apply the patch and commit.
 
 Why a private copy and a pinned tag: the server never changes by surprise, and
 your patch lives next to the code.
@@ -201,7 +201,9 @@ diff --git a/app/apps/server/src/auth/auth.ts b/app/apps/server/src/auth/auth.ts
 ```
 
 Apply with `git apply --3way patches/invite-only-signup.patch`. The line
-numbers were written against v0.1.112. If it does not apply to a newer
+numbers were written against v0.1.112, where `authPool` and `APIError` are
+already imported in `auth.ts`; if you re-create it by hand on a newer release,
+check those two imports still exist. If it does not apply to a newer
 release, have Claude re-create the same check by hand in
 `app/apps/server/src/auth/auth.ts` under `databaseHooks.user.create.before`,
 then build and test.
@@ -282,15 +284,17 @@ server's Tailscale IP), and remember that line exists if you later go public.
 4. Create your account (your email, your password, your hands). As the first
    user you are the admin.
 5. **Rehearse on a throwaway vault first** (10 minutes, worth it): create a
-   vault called `rehearsal`, link it, then from Finder or Claude Code (a) edit a
+   vault in a new folder `~/Vaults/rehearsal`, link it to the server, then from Finder or Claude Code (a) edit a
    note, (b) rename a note in the same folder, (c) move a note to another
    folder. What the original build found: edits and same-folder renames sync
    fine and keep the note's identity; **a move to another folder done outside
    the app leaves a duplicate**. That is why AGENTS.md says moves happen only in
    Baalda or through the connector's `move_note` / `move_folder`. Delete the
    rehearsal vault afterwards.
-6. Open `~/Vaults/OS` in Baalda and turn on sync. Check the note count matches
-   the folder.
+6. Open `~/Vaults/OS` in Baalda and turn on sync. Check: every top-level folder
+   shows in Baalda's sidebar, and three notes you pick at random open with
+   their content. (The exact count is checked in Phase 4 through the connector:
+   `list_notes` must return as many notes as `find ~/Vaults/OS -name '*.md' -not -path '*/.context/*' | wc -l`.)
 7. Settings > General > **Freeze vault root**: nothing new can be created at the
    top level, by anyone, until you lift it. This enforces "never add a
    top-level folder" on every AI.
@@ -330,7 +334,9 @@ name): rename it to **OS** on the "Save your custom app" screen.
 
 **Claude Code / Codex as connector (optional)**
 Not needed on the Mac (they read files). For a cloud or remote coding agent,
-Baalda can issue a bearer token in Vault settings > MCP:
+Baalda can issue a bearer token in Vault settings > MCP. The person creates it
+and types this command themselves in Terminal, replacing `<token>` (Claude
+never sees the token):
 `claude mcp add --transport http os https://os.<yourdomain>/api/mcp --header "Authorization: Bearer <token>"`.
 Keep the token out of any repo.
 

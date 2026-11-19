@@ -6,8 +6,9 @@ good hour here saves hundreds of corrections later.
 
 ## How to run it
 
-- **Seven short sections, one file each.** Ask a section at a time, three to
-  five questions in one message. The person answers **by voice** (dictation on
+- **Seven short sections:** six fill one Context file each, the seventh fills
+  the project register. Ask a section at a time, three to five questions in one
+  message. The person answers **by voice** (dictation on
   the phone or the Mac keyboard's microphone), in any order, as long or short as
   they like. Skipping is fine. Rambling is good: you do the structuring.
 - **Read before you ask.** If the person has existing notes, a website, a pitch
